@@ -7,8 +7,19 @@ const IMG = process.env.REACT_APP_USE_LOCAL_IMAGES === 'true' ? '' : 'https://po
 export const SITE = {
   name: "Kousalya Nivas",
   role: "Bharatanatyam Artist, Choreographer & Artistic Director of M.S. Naatyakshetra",
+  // Publicly displayed email (footer, contact info). For form submission destination see src/data/contactConfig.js
   email: "msnatyalaya@gmail.com",
+  phone: ["+91 96636 80808", "+91 96322 33226"],
+  address: {
+    line1: "No.1, A-Block, AECS Layout",
+    line2: "2nd Main, 3rd Cross, Brookfields",
+    city: "Kundalahalli, Bengaluru",
+    state: "Karnataka",
+    pincode: "560037",
+    full: "No.1, A-Block, AECS Layout, 2nd Main, 3rd Cross, Brookfields, Kundalahalli, Bengaluru, Karnataka 560037",
+  },
   location: "Bengaluru, India",
+  copyrightYear: 2026,
   socials: {
     facebook: "https://www.facebook.com/kousalya.nivaas/",
     instagram: "https://www.instagram.com/kousalya.nivas/",

@@ -95,7 +95,7 @@ const Footer = () => {
         <KolamDivider className="mt-14" color="var(--gold)" />
 
         <div className="mt-8 flex flex-col items-center justify-between gap-3 text-center text-xs sm:flex-row" style={{ color: "rgba(251,246,236,0.6)" }}>
-          <p>© 2026 {SITE.name}. All rights reserved.</p>
+          <p>© {SITE.copyrightYear} {SITE.name}. All rights reserved.</p>
           <p className="italic font-serif-display text-sm" style={{ color: "var(--gold-light)" }}>
             Let the art we cherish be the legacy we leave behind.
           </p>
