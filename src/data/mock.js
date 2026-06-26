@@ -223,7 +223,7 @@ music:
     ],
     gallery: [
      
-      `${IMG}/images/productions/ha.jpg`,
+      `/images/productions/ha.jpg`,
       `${IMG}/images/productions/Hanumantha_new1.jpeg`,
       `${IMG}/images/productions/Hanumantha_new3.jpeg`,
       `${IMG}/images/productions/Hanumantha_new5.jpeg`,
@@ -553,7 +553,7 @@ export const MEDIA = [
 // Gallery — real production & performance imagery, categorised.
 export const GALLERY = [
   // Hanumantha Production
-  { src: `${IMG}/images/productions/ha.jpg`, cat: "Productions" },
+  { src: `/images/productions/ha.jpg`, cat: "Productions" },
   { src: `${IMG}/images/productions/Hanumantha-2.jpg`, cat: "Productions" },
   { src: `${IMG}/images/productions/Hanumantha-6.jpeg`, cat: "Productions" },
   { src: `${IMG}/images/productions/Hanumantha_new1.jpeg`, cat: "Productions" },
