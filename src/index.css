@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&family=Marcellus&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Cultural palette */
+  --ivory: #FBF6EC;
+  --cream: #F6EEDE;
+  --sandal: #EFE3CC;
+  --parchment: #F3EAD7;
+  --maroon: #6E1423;
+  --maroon-deep: #571019;
+  --maroon-soft: #8A2A36;
+  --gold: #B68A3E;
+  --gold-light: #C9A75A;
+  --gold-pale: #E3D2A6;
+  --bronze: #9C6B36;
+  --saffron: #C97E3A;
+  --rose: #E2BCB5;
+  --ink: #3A2A24;
+  --ink-soft: #6B574C;
+}
+
+body {
+  margin: 0;
+  font-family: 'Jost', sans-serif;
+  background-color: var(--ivory);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 18px; /* Increased from default 16px for better readability */
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 17px; /* Slightly smaller on mobile but still larger than default */
+  }
+}
+
+.font-serif-display {
+  font-family: 'Cormorant Garamond', serif;
+}
+.font-marcellus {
+  font-family: 'Marcellus', serif;
+}
+.font-body {
+  font-family: 'Jost', sans-serif;
+}
+.font-num {
+  font-family: 'Cinzel', Georgia, 'Times New Roman', serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+::selection {
+  background: var(--maroon);
+  color: var(--ivory);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: var(--bronze); }
+
+html { scroll-behavior: smooth; }
+
+@layer base {
+  :root {
+    --background: 40 45% 95%;
+    --foreground: 18 25% 19%;
+    --card: 0 0% 100%;
+    --card-foreground: 18 25% 19%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 18 25% 19%;
+    --primary: 350 70% 25%;
+    --primary-foreground: 40 45% 95%;
+    --secondary: 40 40% 90%;
+    --secondary-foreground: 350 70% 25%;
+    --muted: 40 30% 90%;
+    --muted-foreground: 25 15% 42%;
+    --accent: 40 50% 70%;
+    --accent-foreground: 350 70% 25%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 40 35% 82%;
+    --input: 40 35% 82%;
+    --ring: 38 50% 47%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+}
+
+/* Letter-spaced eyebrow text */
+.eyebrow {
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-size: 0.8rem; /* Increased from 0.72rem for better readability */
+  font-weight: 500;
+}
+
+/* Gold thin top-border luxe card */
+.luxe-card {
+  background: #FFFDF8;
+  border: 1px solid rgba(182, 138, 62, 0.35);
+  box-shadow: 0 18px 40px -28px rgba(110, 20, 35, 0.35);
+}
+
+/* Reveal animation initial state (GSAP toggles) */
+.reveal-init { opacity: 0; transform: translateY(34px); }
+
+/* Mandala spin */
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.spin-slow { animation: spin-slow 90s linear infinite; }
+
+/* Temple arch shape via clip-path (top rounded ogee approximation) */
+.temple-arch {
+  border-top-left-radius: 50% 28%;
+  border-top-right-radius: 50% 28%;
+}
+
+/* image hover zoom */
+.zoom-img { transition: transform 0.7s cubic-bezier(0.2,0.7,0.2,1); }
+.zoom-parent:hover .zoom-img { transform: scale(1.07); }
+
+/* flame flicker for oil lamps */
+@keyframes flicker {
+  0%, 100% { transform: scaleY(1) scaleX(1); opacity: 1; }
+  25% { transform: scaleY(1.12) scaleX(0.94); opacity: 0.88; }
+  50% { transform: scaleY(0.94) scaleX(1.05); opacity: 1; }
+  75% { transform: scaleY(1.06) scaleX(0.97); opacity: 0.92; }
+}
+.flame { transform-origin: center bottom; animation: flicker 1.5s ease-in-out infinite; }
+.flame-b { animation-delay: 0.35s; }
+.flame-c { animation-delay: 0.7s; }
+.flame-d { animation-delay: 0.5s; }
+.flame-e { animation-delay: 0.9s; }
+
+/* glow halo behind flame */
+@keyframes glow { 0%,100% { opacity: 0.45; } 50% { opacity: 0.8; } }
+.flame-glow { animation: glow 2s ease-in-out infinite; }
+
+/* gentle sway for hanging lamps */
+@keyframes sway { 0%, 100% { transform: rotate(-2.2deg); } 50% { transform: rotate(2.2deg); } }
+.sway { transform-origin: top center; animation: sway 4.5s ease-in-out infinite; }
+
+/* rangoli rotates slowly, drawn over ivory via multiply blend */
+.rangoli-bg { mix-blend-mode: multiply; }
+
+/* Hero section responsive background position */
+.hero-bg-mobile {
+  
+  background-position:  100% 30% !important;
+}
+
+@media (min-width: 1024px) {
+  .hero-bg-desktop {
+   
+    background-position: 100% 45% !important;
+  }
+}

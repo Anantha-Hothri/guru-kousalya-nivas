@@ -1,0 +1,7 @@
+.App {
+  min-height: 100vh;
+  background: var(--ivory);
+}
+
+/* prevent horizontal scroll from decorative overflow */
+body, html { overflow-x: hidden; }
