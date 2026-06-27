@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Clock, Users, Music, BookOpen, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
 import { PRODUCTIONS } from "../data/mock";
 import { Mandala, KolamDivider, SectionTitle, Lotus, RangoliBg } from "../components/decorative/Ornaments";
@@ -8,7 +8,6 @@ import { useReveal } from "../hooks/useAnim";
 
 const ProductionDetail = () => {
   const { slug } = useParams();
-  const navigate = useNavigate();
   const [video, setVideo] = useState(null);
   const [videoIndex, setVideoIndex] = useState(0);
   const [videoType, setVideoType] = useState(null); // 'performance' or 'review'
@@ -18,17 +17,11 @@ const ProductionDetail = () => {
   const galRef = useReveal();
   const scrollRef = useRef(null);
 
-  // Handler to navigate back to Productions with scroll restoration flag
-  const handleBackToProductions = (e) => {
-    e.preventDefault();
-    navigate('/productions', { state: { fromProductionDetail: true } });
-  };
-
   if (!prod) {
     return (
       <div className="flex min-h-[70vh] flex-col items-center justify-center gap-5 px-6 pt-24 text-center">
         <h1 className="font-serif-display text-4xl" style={{ color: "var(--maroon)" }}>Production not found</h1>
-        <a href="/productions" onClick={handleBackToProductions} className="text-sm tracking-[0.16em] uppercase" style={{ color: "var(--bronze)" }}>← Back to Productions</a>
+        <Link to="/productions" className="text-sm tracking-[0.16em] uppercase" style={{ color: "var(--bronze)" }}>← Back to Productions</Link>
       </div>
     );
   }
@@ -158,9 +151,9 @@ const ProductionDetail = () => {
       <section className="relative overflow-hidden pt-32 pb-14" style={{ background: "var(--cream)" }}>
         <RangoliBg className="absolute right-0 top-10 h-[420px] w-[420px]" opacity={0.1} />
         <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
-          <a href="/productions" onClick={handleBackToProductions} className="mb-6 inline-flex items-center gap-2 text-xs tracking-[0.16em] uppercase cursor-pointer" style={{ color: "var(--bronze)" }}>
+          <Link to="/productions" className="mb-6 inline-flex items-center gap-2 text-xs tracking-[0.16em] uppercase" style={{ color: "var(--bronze)" }}>
             <ArrowLeft size={15} /> Back to Productions
-          </a>
+          </Link>
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div className="max-w-full overflow-hidden">
               <div className="flex items-center gap-3">

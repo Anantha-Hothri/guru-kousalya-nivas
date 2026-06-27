@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { PageHero, LuxeButton } from "../components/Shared";
 import { SectionTitle, Lotus } from "../components/decorative/Ornaments";
 import { PRODUCTIONS, ADVITIYAM } from "../data/mock";
@@ -11,29 +11,6 @@ const Productions = () => {
   const [filter, setFilter] = useState("All");
   const listRef = useReveal([filter]);
   const items = PRODUCTIONS.filter((p) => filter === "All" || p.type === filter);
-  const location = useLocation();
-
-  // Restore scroll position when coming back from production detail page
-  useEffect(() => {
-    const savedScrollPosition = sessionStorage.getItem('productionsScrollPosition');
-
-    if (savedScrollPosition && location.state?.fromProductionDetail) {
-      // Restore scroll position after a short delay to ensure page is rendered
-      setTimeout(() => {
-        window.scrollTo(0, parseInt(savedScrollPosition, 10));
-      }, 100);
-    }
-
-    // Clear the flag after restoring
-    if (location.state?.fromProductionDetail) {
-      window.history.replaceState({}, document.title);
-    }
-  }, [location]);
-
-  // Save scroll position before navigating away
-  const handleProductionClick = () => {
-    sessionStorage.setItem('productionsScrollPosition', window.scrollY.toString());
-  };
 
   return (
     <div>
@@ -77,7 +54,6 @@ const Productions = () => {
             <Link
               key={p.slug}
               to={`/productions/${p.slug}`}
-              onClick={handleProductionClick}
               data-reveal
               className="group flex flex-col overflow-hidden rounded-2xl luxe-card transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
             >
