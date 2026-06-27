@@ -3,7 +3,7 @@ import { PageHero, YouTubeModal, VideoTile } from "../components/Shared";
 import { SectionTitle, Mandala, Lotus, KolamDivider, TempleArchFrame, RangoliBg } from "../components/decorative/Ornaments";
 import { GURU } from "../data/mock";
 import { useReveal, useCounter } from "../hooks/useAnim";
-import { Footprints, Heart, Theater, Users, Quote } from "lucide-react";
+import { Footprints, Heart, Theater, Users, Quote, Award, Lightbulb, Palette, Drama } from "lucide-react";
 
 const ICONS = { Footprints, Heart, Theater, Users };
 
@@ -21,6 +21,7 @@ const Guru = () => {
   const [video, setVideo] = useState(null);
   const linRef = useReveal();
   const pilRef = useReveal();
+  const masteryRef = useReveal();
   const legRef = useReveal();
   const tesRef = useReveal();
 
@@ -99,6 +100,97 @@ const Guru = () => {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* Mastery - Shaping Professional Artists */}
+      <section className="py-20" style={{ background: "var(--parchment)" }}>
+        <div className="mx-auto max-w-[1100px] px-6 lg:px-10">
+          {/* Header */}
+          <div className="text-center">
+            <p className="eyebrow mb-3 text-[0.65rem] sm:text-xs" style={{ color: "var(--bronze)" }}>14 Years of Excellence</p>
+            <h2 className="font-serif-display text-3xl font-semibold sm:text-4xl md:text-5xl" style={{ color: "var(--maroon)" }}>
+              The Mastery of Guru Kousalya Nivas:<br />Shaping Professional Artists
+            </h2>
+            <Lotus className="mx-auto my-6 h-6 w-12" color="var(--gold)" />
+          </div>
+
+          {/* Intro */}
+          <div ref={masteryRef} className="mx-auto mt-8 max-w-3xl text-center">
+            <p data-reveal className="text-base leading-relaxed sm:text-lg" style={{ color: "var(--ink-soft)" }}>
+              For 14 years, Guru Kousalya Nivas has been more than an instructor—she has been a <strong style={{ color: "var(--maroon)" }}>visionary mentor to over 500 students</strong>. Her training goes beyond the classroom, turning aspiring learners into stage-ready professionals who command the spotlight with technical precision and artistic soul.
+            </p>
+          </div>
+
+          {/* Why Students Stand Apart */}
+          <div className="mt-16">
+            <h3 className="text-center font-serif-display text-2xl font-semibold sm:text-3xl" style={{ color: "var(--maroon)" }}>
+              Why Her Students Stand Apart
+            </h3>
+            <p className="mx-auto mt-4 max-w-3xl text-center text-sm leading-relaxed sm:text-base" style={{ color: "var(--ink-soft)" }}>
+              The hallmarks of a student trained by Guru Kousalya Nivas are <strong style={{ color: "var(--maroon)" }}>versatility and independence</strong>. Her holistic curriculum ensures every dancer is an expert in:
+            </p>
+
+            {/* Expertise Cards */}
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              <div data-reveal className="luxe-card rounded-xl p-6 text-center">
+                <span className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full" style={{ background: "var(--cream)", border: "1px solid var(--gold)" }}>
+                  <Award size={24} style={{ color: "var(--maroon)" }} />
+                </span>
+                <h4 className="font-serif-display text-lg font-semibold" style={{ color: "var(--maroon)" }}>Performance Excellence</h4>
+                <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--ink-soft)" }}>
+                  Guided through rigorous training to complete their Arangetram and achieve recognized Artistic Grades.
+                </p>
+              </div>
+
+              <div data-reveal className="luxe-card rounded-xl p-6 text-center">
+                <span className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full" style={{ background: "var(--cream)", border: "1px solid var(--gold)" }}>
+                  <Lightbulb size={24} style={{ color: "var(--maroon)" }} />
+                </span>
+                <h4 className="font-serif-display text-lg font-semibold" style={{ color: "var(--maroon)" }}>The Full Production Spectrum</h4>
+                <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--ink-soft)" }}>
+                  Mastery in the technicalities of Lighting Design, Stage Setup, and Props Making.
+                </p>
+              </div>
+
+              <div data-reveal className="luxe-card rounded-xl p-6 text-center">
+                <span className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full" style={{ background: "var(--cream)", border: "1px solid var(--gold)" }}>
+                  <Palette size={24} style={{ color: "var(--maroon)" }} />
+                </span>
+                <h4 className="font-serif-display text-lg font-semibold" style={{ color: "var(--maroon)" }}>Visual Artistry</h4>
+                <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--ink-soft)" }}>
+                  Professional skills in Stage Makeover and costume aesthetics.
+                </p>
+              </div>
+
+              <div data-reveal className="luxe-card rounded-xl p-6 text-center">
+                <span className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full" style={{ background: "var(--cream)", border: "1px solid var(--gold)" }}>
+                  <Drama size={24} style={{ color: "var(--maroon)" }} />
+                </span>
+                <h4 className="font-serif-display text-lg font-semibold" style={{ color: "var(--maroon)" }}>The Power of Abhinaya</h4>
+                <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--ink-soft)" }}>
+                  Specialized coaching in acting and emotional expression, elevating movement into storytelling.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* From Classroom to Stage */}
+          <div className="mx-auto mt-16 max-w-3xl rounded-2xl p-8 text-center luxe-card" style={{ background: "var(--ivory)" }}>
+            <h3 className="font-serif-display text-2xl font-semibold sm:text-3xl" style={{ color: "var(--maroon)" }}>
+              From the Classroom to the Stage
+            </h3>
+            <KolamDivider className="my-6" />
+            <p className="text-base leading-relaxed" style={{ color: "var(--ink-soft)" }}>
+              Success at this academy is measured by <strong style={{ color: "var(--maroon)" }}>real-world experience</strong>. Students don't just learn from the sidelines; they perform alongside their Guru in major productions. By the time they graduate, they have evolved from "normal dancers" into seasoned professionals who understand the rhythm of the music and the mechanics of the stage.
+            </p>
+            <div className="mt-8">
+              <Quote size={28} className="mx-auto mb-4 opacity-30" style={{ color: "var(--gold)" }} />
+              <p className="font-serif-display text-xl italic leading-snug sm:text-2xl" style={{ color: "var(--maroon-soft)" }}>
+                "Training here is an apprenticeship in excellence—where tradition meets the modern stage."
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
