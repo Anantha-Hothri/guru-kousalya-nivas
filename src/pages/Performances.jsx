@@ -35,7 +35,11 @@ const Performances = () => {
                   src={h.image}
                   alt={h.title}
                   className="h-[420px] w-full object-cover"
-                  style={h.title === "Mysore Dasara Festival" ? { objectPosition: "40% center" } : {}}
+                  style={
+                    h.title === "Recognized Cultural Festivals" ? { objectPosition: "35% center" } :
+                    h.title === "Temple Festivals" ? { objectPosition: "35% center" } :
+                    {}
+                  }
                   loading="lazy"
                 />
               </ClassicFrame>
