@@ -610,8 +610,6 @@ export const GALLERY = [
   { src: `${IMG}/images/productions/Tiruppavai-5.jpg`, cat: "Portraits" },
 
   // Additional Performance & Portrait Gallery
-  { src: `${IMG}/images/performances/International.JPG`, cat: "Performances" },
-  { src: `${IMG}/images/gallery/MS group.jpeg`, cat: "Group" },
   { src: `${IMG}/images/gallery/kou8.jpeg`, cat: "Portraits" },
   { src: `${IMG}/images/gallery/kou3.jpeg`, cat: "Portraits" },
   { src: `${IMG}/images/gallery/IMG_8177.JPG.jpeg`, cat: "Portraits" },

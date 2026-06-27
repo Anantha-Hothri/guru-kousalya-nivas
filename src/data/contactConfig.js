@@ -9,7 +9,7 @@
 //   you want them to stay in sync.
 // ─────────────────────────────────────────────────────────────────
 
-export const CONTACT_EMAIL = "doraisaicharan68@gmail.com";
+export const CONTACT_EMAIL = "msnatyalaya@gmail.com";
 
 export const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
 
