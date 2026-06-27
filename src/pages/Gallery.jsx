@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { PageHero } from "../components/Shared";
-import { GALLERY, GALLERY_FILTERS } from "../data/mock";
+import { GALLERY } from "../data/mock";
 import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 
 // ─── Single image card ─────────────────────────────────────────
@@ -108,34 +108,40 @@ const GalleryModal = ({ image, onClose, onPrev, onNext }) => {
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 const Gallery = () => {
-  const [filter, setFilter] = useState("All");
   const [activeImage, setActiveImage] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const imagesPerPage = 20;
 
-  // Filter images - reorganize to show /images/gallery first
-  const filteredItems = useMemo(() => {
-    const filtered = GALLERY.filter((g) => filter === "All" || g.cat === filter);
-
+  // Reorganize to show /images/gallery first
+  const sortedImages = useMemo(() => {
     // Separate images in priority order:
     // 1. Local gallery images (/images/gallery/)
     // 2. Other local images (/images/)
     // 3. External hosted images
-    const galleryImages = filtered.filter(img =>
+    const galleryImages = GALLERY.filter(img =>
       img.src.includes('/images/gallery/')
     );
-    const otherLocalImages = filtered.filter(img =>
+    const otherLocalImages = GALLERY.filter(img =>
       img.src.startsWith('/images/') && !img.src.includes('/images/gallery/')
     );
-    const externalImages = filtered.filter(img =>
+    const externalImages = GALLERY.filter(img =>
       !img.src.startsWith('/images/')
     );
 
     return [...galleryImages, ...otherLocalImages, ...externalImages];
-  }, [filter]);
+  }, []);
+
+  // Pagination
+  const totalPages = Math.ceil(sortedImages.length / imagesPerPage);
+  const startIndex = (currentPage - 1) * imagesPerPage;
+  const endIndex = startIndex + imagesPerPage;
+  const currentImages = sortedImages.slice(startIndex, endIndex);
 
   const openLightbox = (index) => {
-    setActiveIndex(index);
-    setActiveImage(filteredItems[index]);
+    const globalIndex = startIndex + index;
+    setActiveIndex(globalIndex);
+    setActiveImage(sortedImages[globalIndex]);
   };
 
   const closeLightbox = () => {
@@ -145,11 +151,16 @@ const Gallery = () => {
   const navigateLightbox = (dir) => {
     setActiveIndex((prev) => {
       const next = dir === "next"
-        ? (prev + 1) % filteredItems.length
-        : (prev - 1 + filteredItems.length) % filteredItems.length;
-      setActiveImage(filteredItems[next]);
+        ? (prev + 1) % sortedImages.length
+        : (prev - 1 + sortedImages.length) % sortedImages.length;
+      setActiveImage(sortedImages[next]);
       return next;
     });
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -161,7 +172,7 @@ const Gallery = () => {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [activeImage, filteredItems]);
+  }, [activeImage, sortedImages]);
 
   return (
     <div>
@@ -171,32 +182,10 @@ const Gallery = () => {
       />
 
       <section className="py-12 sm:py-16" style={{ background: "var(--ivory)" }}>
-        {/* Filter buttons */}
-        <div className="mb-10 flex flex-wrap justify-center gap-2 px-4 sm:gap-3 sm:px-6">
-          {GALLERY_FILTERS.map((f) => {
-            const isActive = filter === f;
-            return (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className="px-3 py-1.5 text-[9px] font-semibold tracking-[0.14em] uppercase transition-all duration-300 sm:px-5 sm:py-2 sm:text-[11px]"
-                style={{
-                  background: isActive ? "var(--maroon)" : "transparent",
-                  color: isActive ? "var(--ivory)" : "var(--maroon)",
-                  border: `1px solid ${isActive ? "var(--maroon)" : "var(--gold)"}`,
-                  borderRadius: "999px",
-                }}
-              >
-                {f}
-              </button>
-            );
-          })}
-        </div>
-
         {/* Gallery Grid */}
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-            {filteredItems.map((image, index) => (
+            {currentImages.map((image, index) => (
               <GalleryCard
                 key={`${image.src}-${index}`}
                 image={image}
@@ -204,6 +193,49 @@ const Gallery = () => {
               />
             ))}
           </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="mt-12 flex items-center justify-center gap-2">
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110"
+                style={{ border: "1px solid var(--gold)", color: "var(--gold-light)" }}
+              >
+                <ChevronLeft size={20} />
+              </button>
+
+              <div className="flex gap-2">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                  const isActive = page === currentPage;
+                  return (
+                    <button
+                      key={page}
+                      onClick={() => handlePageChange(page)}
+                      className="h-10 w-10 rounded-full text-sm font-semibold transition-all duration-300"
+                      style={{
+                        background: isActive ? "var(--maroon)" : "transparent",
+                        color: isActive ? "var(--ivory)" : "var(--maroon)",
+                        border: `1px solid ${isActive ? "var(--maroon)" : "var(--gold)"}`,
+                      }}
+                    >
+                      {page}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-110"
+                style={{ border: "1px solid var(--gold)", color: "var(--gold-light)" }}
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

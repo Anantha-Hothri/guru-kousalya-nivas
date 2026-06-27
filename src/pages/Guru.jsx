@@ -19,11 +19,11 @@ const LegacyStat = ({ value, label }) => {
 
 const Guru = () => {
   const [video, setVideo] = useState(null);
-  const linRef = useReveal();
-  const pilRef = useReveal();
+  // const linRef = useReveal(); // Commented out - Lineage section removed
+  // const pilRef = useReveal(); // Commented out - Pillars section removed
   const masteryRef = useReveal();
   const legRef = useReveal();
-  const tesRef = useReveal();
+  // const tesRef = useReveal(); // Commented out - Testimonials section removed
 
   return (
     <div>
@@ -57,8 +57,8 @@ const Guru = () => {
         </div>
       </section>
 
-      {/* Lineage */}
-      <section className="py-20" style={{ background: "var(--cream)" }}>
+      {/* Lineage - COMMENTED OUT */}
+      {/* <section className="py-20" style={{ background: "var(--cream)" }}>
         <SectionTitle eyebrow="Guru-Shishya Parampara" title="Artistic Lineage" />
         <div ref={linRef} className="mx-auto mt-14 grid max-w-[1100px] gap-6 px-6 md:grid-cols-3 lg:px-10">
           {GURU.lineage.map((l) => (
@@ -72,20 +72,20 @@ const Guru = () => {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
-      {/* Mission */}
-      <section className="py-20" style={{ background: "var(--ivory)" }}>
+      {/* Mission - COMMENTED OUT */}
+      {/* <section className="py-20" style={{ background: "var(--cream)" }}>
         <div className="mx-auto max-w-[900px] px-6 text-center lg:px-10">
           <p className="eyebrow mb-3" style={{ color: "var(--bronze)" }}>Our Purpose</p>
           <h2 className="font-serif-display text-4xl font-semibold md:text-5xl" style={{ color: "var(--maroon)" }}>Mission</h2>
           <Lotus className="mx-auto my-6 h-6 w-12" color="var(--gold)" />
           <p className="text-base leading-relaxed text-justify" style={{ color: "var(--ink-soft)" }}>{GURU.mission}</p>
         </div>
-      </section>
+      </section> */}
 
-      {/* Pillars */}
-      <section className="py-20" style={{ background: "var(--cream)" }}>
+      {/* Pillars - COMMENTED OUT */}
+      {/* <section className="py-20" style={{ background: "var(--cream)" }}>
         <SectionTitle eyebrow="Training Philosophy" title="Pillars of Training" />
         <div ref={pilRef} className="mx-auto mt-14 grid max-w-[1180px] gap-6 px-6 sm:grid-cols-2 lg:grid-cols-4 lg:px-10">
           {GURU.pillars.map((p) => {
@@ -101,10 +101,10 @@ const Guru = () => {
             );
           })}
         </div>
-      </section>
+      </section> */}
 
       {/* Mastery - Shaping Professional Artists */}
-      <section className="py-20" style={{ background: "var(--parchment)" }}>
+      <section className="py-20" style={{ background: "var(--cream)" }}>
         <div className="mx-auto max-w-[1100px] px-6 lg:px-10">
           {/* Header */}
           <div className="text-center">
@@ -187,7 +187,7 @@ const Guru = () => {
             <div className="mt-8">
               <Quote size={28} className="mx-auto mb-4 opacity-30" style={{ color: "var(--gold)" }} />
               <p className="font-serif-display text-xl italic leading-snug sm:text-2xl" style={{ color: "var(--maroon-soft)" }}>
-                "Training here is an apprenticeship in excellence—where tradition meets the modern stage."
+                "Learning happens in the studio, but artistry is born on stage."
               </p>
             </div>
           </div>
@@ -206,15 +206,15 @@ const Guru = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20" style={{ background: "var(--cream)" }}>
+      {/* Testimonials - COMMENTED OUT */}
+      {/* <section className="py-20" style={{ background: "var(--ivory)" }}>
         <SectionTitle eyebrow="Voices of the Shishyas" title="The Impact of a True Mentor" />
         <div ref={tesRef} className="mx-auto mt-14 grid max-w-[1280px] gap-8 px-6 md:grid-cols-3 lg:px-10">
           {GURU.testimonials.map((t) => {
             // Custom image positioning for each student
             const getImageStyles = () => {
               if (t.name === 'Pavan Singh') {
-                return 'w-full h-full object-cover scale-[2.3] object-[55%_5%]';
+                return 'w-full h-full object-cover scale-[1.8] object-[65%_15%]';
               } else if (t.name === 'Manasa K R') {
                 return 'w-full h-full object-cover scale-150 object-[center_30%]';
               } else {
@@ -223,9 +223,9 @@ const Guru = () => {
             };
 
             return (
-              <div 
-                key={t.name} 
-                data-reveal 
+              <div
+                key={t.name}
+                data-reveal
                 className="luxe-card flex flex-col rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
                 <div className="flex items-center gap-4 mb-6 pb-6" style={{ borderBottom: "1px solid rgba(182,138,62,0.2)" }}>
@@ -263,15 +263,15 @@ const Guru = () => {
             );
           })}
         </div>
-      </section>
+      </section> */}
 
-      {/* Videos */}
-      <section className="py-20" style={{ background: "var(--ivory)" }}>
+      {/* Videos - COMMENTED OUT */}
+      {/* <section className="py-20" style={{ background: "var(--cream)" }}>
         <SectionTitle eyebrow="Watch" title="Student Performance Highlights" />
         <div className="mx-auto mt-12 grid max-w-[1100px] gap-5 px-6 sm:grid-cols-3 lg:px-10">
           {GURU.videos.map((v) => <VideoTile key={v} videoId={v} onPlay={setVideo} />)}
         </div>
-      </section>
+      </section> */}
 
       <YouTubeModal videoId={video} onClose={() => setVideo(null)} />
     </div>

@@ -24,10 +24,10 @@ const Performances = () => {
     <div>
       <PageHero title="Performances" breadcrumb={[{ label: "Home", path: "/" }, { label: "Performances" }]} />
 
-      <section className="py-20" style={{ background: "var(--ivory)" }}>
-        <p className="mx-auto max-w-2xl px-6 text-center text-base leading-relaxed" style={{ color: "var(--ink-soft)" }}>{PERFORMANCES.intro}</p>
-        <SectionTitle eyebrow="International Recognition" title="Major Milestones" />
-        <div ref={hiRef} className="mx-auto mt-14 grid max-w-[1280px] gap-8 px-6 md:grid-cols-3 lg:px-10">
+      <section className="pt-12 pb-20" style={{ background: "var(--ivory)" }}>
+        <SectionTitle title="Key Performances" />
+        <p className="mx-auto mt-8 mb-14 max-w-4xl px-6 lg:px-20 text-center text-base leading-relaxed" style={{ color: "var(--ink-soft)" }}>{PERFORMANCES.intro}</p>
+        <div ref={hiRef} className="mx-auto grid max-w-[1280px] gap-8 px-6 md:grid-cols-3 lg:px-10">
           {PERFORMANCES.highlights.map((h) => (
             <div key={h.title} data-reveal className="flex flex-col items-center">
               <ClassicFrame className="w-full max-w-[340px]">

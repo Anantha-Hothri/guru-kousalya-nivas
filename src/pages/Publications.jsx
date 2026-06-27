@@ -15,10 +15,10 @@ const Publications = () => {
 
       {/* Book */}
       <section className="py-20" style={{ background: "var(--ivory)" }}>
-        <div ref={bookRef} className="mx-auto grid max-w-[1100px] items-center gap-12 px-6 lg:grid-cols-[340px_1fr] lg:px-10">
-          <div data-reveal className="relative mx-auto w-[280px]">
+        <div ref={bookRef} className="mx-auto grid max-w-[1100px] items-center gap-12 px-6 lg:grid-cols-[380px_1fr] lg:px-10">
+          <div data-reveal className="relative mx-auto w-[320px]">
             <div className="overflow-hidden rounded-lg" style={{ border: "2px solid var(--gold)", boxShadow: "0 30px 60px -28px rgba(110,20,35,0.45)" }}>
-              <img src={book.image} alt={book.title} className="h-[400px] w-full object-cover" />
+              <img src={book.image} alt={book.title} className="h-[450px] w-full object-cover" />
             </div>
           </div>
           <div data-reveal>

@@ -71,7 +71,7 @@ export const ABOUT = {
   paragraphs: [
     "Dr. Kousalya Nivas is an acclaimed Bharatanatyam exponent, choreographer, and visionary educator with an illustrious career spanning 35 years and over 1,000 stage performances. Known for her creative vision, expressive presentation, and innovative choreography, she founded M.S. Naatyakshetra in 2012 alongside her husband Shri. Nivas Venkataramanan with a selfless intent to nurture the art and culture of our nation. As Founder, Guru, and Artistic Director, she has mentored over 500 students, bridging the gap between sacred tradition and contemporary innovation.",
     "Her journey began at the age of four under Guru. Kalaimamani Smt. Revathy Muthuswamy. Today, she continues to deepen her artistry through the study of Karanas under Dr. Guru. Anuradha Vikranth and Nattuvangam under Guru. Shri Ramamoorthy Sriganesh.",
-    "What truly distinguishes Dr. Kousalya is her rare synthesis of artistic scholarship and technical excellence. She holds an Honorary Doctorate in recognition of her contributions to the arts, alongside an M.F.A. in Bharatanatyam from Annamalai University, Chidambaram. She also possesses strong technical credentials, including an M.Tech in Computer Networks from CMRIT and a B.Tech in Information Technology from Sri Ramakrishna Engineering College.",
+    "What truly distinguishes Dr. Kousalya is her rare synthesis of artistic scholarship and technical excellence. She holds an Honorary Doctorate with title \"Bharatiya Natya Visaradha\", a prestigious recognition from International Vanguard University, Chicago, USA, in recognition of her contributions to the arts, alongside an M.F.A. in Bharatanatyam from Annamalai University, Chidambaram. She also possesses strong technical credentials, including an M.Tech in Computer Networks from CMRIT and a B.Tech in Information Technology from Sri Ramakrishna Engineering College.",
     "Throughout her illustrious career, Dr. Kousalya Nivas has choreographed numerous signature works that bring epic narratives to life. Her vision for the future of Bharatanatyam is embodied in the legacy she has created through Parvata Vedike, an in-house auditorium dedicated to nurturing artistic excellence.",
   ],
   pillars: [
@@ -92,7 +92,7 @@ export const ABOUT = {
     { year: "2012", text: "Founded M.S. Naatyakshetra alongside Shri. Nivas Venkataramanan." },
     { year: "2018", text: "Honoured with NADAM Kalabhooshan at the International Classical Dance Festival, Dubai." },
     { year: "2022", text: "Premiered Sri Rama Hanumantha; performed at Mysore Dasara Main Palace." },
-    { year: "2025", text: "Conferred an Honorary Doctorate in Classical Bharatanatyam." },
+    { year: "2025", text: "Conferred an Honorary Doctorate with title \"Bharatiya Natya Visaradha\" from International Vanguard University, Chicago, USA." },
   ],
 };
 
@@ -112,7 +112,7 @@ export const PRODUCTIONS = [
 "Andal Thiruppavai is a live concert that combines intricate footwork, expressive gestures, and emotive storytelling of 13 out of 30 Tamil devotional hymns composed by Andal, the only female Alvar saint of the Vaishnavite tradition. These hymns are part of the Divya Prabandham and are recited during the Margazhi month (December-January) as a form of devotion to Lord Vishnu. These pasurams are beautifully choreographed to provide a harmonious blend of rhythm, melody, and artistry, offering audiences an immersive experience of Andal's devotion and love towards Krishna.",
     reference: "Andal's Thiruppavai - Divya Prabandham",
     stages: [
-      "Parvata Vedike, Whitefield, Bengaluru",
+      "Parvata Vedike, Brookfield, Bengaluru",
       "Seva Sadan, Malleshwaram, Bengaluru",
     ],
     gallery: [
@@ -221,6 +221,7 @@ music:
       "CMR founders' day, Byrathi Campus",
       "Ramanavami Festival, Sarjapur",
       "Kala Arpan at Art of Living International Center, Kanakapura, Bengaluru",
+      "Sri Paripoorna Sanathana Ayurveda Medical College, Hospital & Research Centre, Nelamangala Taluk, Bengaluru Rural District, Karnataka"
 
 
     ],
@@ -276,7 +277,8 @@ music:
       "Nrityantara Festival 2021, Chowdaih Memorial Hall",
     ],
     gallery: [
-  
+      `${IMG}/images/productions/Shiva_Grup.jpg.jpeg`,
+      `${IMG}/images/productions/Smiling_Shiva.JPG.jpeg`,
       `${IMG}/images/productions/shivom-6.jpeg`,
       `${IMG}/images/productions/shivom-7.jpeg`,
       `${IMG}/images/productions/shivom-8.jpeg`,
@@ -302,63 +304,61 @@ export const ADVITIYAM = {
 };
 
 export const PERFORMANCES = {
-  intro: "Celebrating decades of dedication across the world's most prestigious stages.",
+  intro: "A glimpse into Kousalya Nivas's artistic journey through prestigious performances at renowned sabhas, temples, cultural festivals, and institutions across India.",
   highlights: [
     {
-      title: "International Recognition & Professional Mastery",
+      title: "Recognized Cultural Festivals",
       points: [
-        "Dubai International Art Festival",
-        "Securonix Corporate CEO Connect ",
-        "ITC Hotel International Conference (2017)",
-        "Top CEO Meet at Shangri-La Hotel"
-      ],
-      image: `${IMG}/images/performances/International.JPG`
-    },
-    {
-      title: "Mysore Dasara Festival",
-      points: [
-        "Main Palace Stage (2016)",
-        "Kalamandira (2022)",
-        "Jaganmohan Palace (2018)"
+        "Mysuru Dasara Festival (Main Palace, Kalamandira, Jaganmohan Palace)",
+        "Niranthara Festival",
+        "Kannada Rajyotsava",
+        "Seva Sadan Republic Day",
+        "Ravindra Kalakshetra Nrithyantara Festival",
+        "Chowdiah Memorial Hall ICCR Cultural Program"
       ],
       image: `${IMG}/images/performances/mysore_dasara_festival.jpeg`
     },
     {
-      title: "All-India Competition",
+      title: "Corporate Connect",
       points: [
-        "First Place Winner in All-India Bharatanatyam Competition",
-        "Presented by Mrs. Latha Rajinikanth",
-        "A defining moment in professional career"
+        "International Medical Conference, ITC Hotel",
+        "Securonix Corporate CEO Connect, Radisson Blu Hotel",
+        "Top CEO Meet, Shangri-La Hotel",
+        "Gadag Festival (Outreach program by Infosys Foundation & Bhartiya Vidya Bhavan)"
       ],
-      image: `${IMG}/images/performances/WhatsApp Image 2026-04-15 at 5.26.09 PM.jpeg`
+      image: `${IMG}/images/performances/International.JPG`
+    },
+    {
+      title: "Temple Festivals",
+      points: [
+        "Chidambaram Natyanjali",
+        "Brahan Natyanjali, Tanjore",
+        "Brahadeshwara Temple Navaratri",
+        "Kollur Moogambigai Temple Lakshadeepa Utsava",
+        "Dharmastala Uchilla Dasara, Mahalakshmi Temple, Udupi"
+      ],
+      image: `${IMG}/images/productions/shivom-7.jpeg`
     },
   ],
   groups: [
     {
       title: "Natyanjali Festival",
-      items: ["Tiruvanaikoil Natyanjali, Trichy", "Naalathe Natyanjali, Malaikottai, Trichy", "Kashi Vishvanath Temple Natyanjali, Trichy", "Tiruvadaimarudur Natyanjali", "Chidambaram Natyanjali", "Brahan Natyanjali"],
+      items: ["Tiruvanaikoil Natyanjali, Trichy", "Naalathe Natyanjali, Malaikottai, Trichy", "Kashi Vishvanath Temple Natyanjali, Trichy", "Tiruvadaimarudur Natyanjali"],
     },
     {
       title: "Temple Utsavs",
       items: [
-        "Uchilla Dasara, Mahalakshmi Temple, Udupi",
-        "Lakshadeepa Utsava, Dharmasthala",
         "Sreedevi Boodevi Sametha Sri Venkataswamy Temple, BEML Layout, Bengaluru",
         "Siddi Vinayaka Temple, BEML Layout",
-        "Kolluru Mookambige Temple",
         "Belaguru Hanuman Temple",
         "Srirangam Ranganathar Temple",
         "Malaikottai Vinayagar Temple, Trichy",
         "Mannachannaluru Anjaneyar Temple",
-        "Navarathri Utsav at Temples, Bengaluru",
-        "Gadag Festival (Infosys Foundation & Bharathiya Vidya Bhavan)",
       ],
     },
     {
       title: "Cultural & Academic Events",
       items: [
-        "ICCR Everyday Cultural Program",
-        "Nrithyantara 2022, Chowdiah Hall",
         "Khelo India 2022",
         "International Yoga Celebration, SVYASA",
         "Founders' Day at CMRIT, 2009",
@@ -372,10 +372,7 @@ export const PERFORMANCES = {
     {
       title: "Cultural Festivals",
       items: [
-        "Republic Day Function at Ravindra Kalakshetra, Bengaluru",
-        "Kannada Rajyotsava Celebrations at Seva Sadan",
         "Independence Day Celebrations by BJP Cultural Wing",
-        "Niranthara Festival, Seva Sadan",
         "Bengali Cultural Festivals",
         "Kerala Cultural Festivals (Samarpana)",
         "Tamil Sangam Events",
@@ -593,6 +590,8 @@ export const GALLERY = [
   { src: `${IMG}/images/productions/Mukundaleela-5.jpg`, cat: "Productions" },
 
   // Shivom - Jagat Kaarana
+  { src: `${IMG}/images/productions/Shiva_Grup.jpg.jpeg`, cat: "Group" },
+  { src: `${IMG}/images/productions/Smiling_Shiva.JPG.jpeg`, cat: "Performances" },
   { src: `${IMG}/images/productions/shivom-1.jpg`, cat: "Performances" },
   { src: `${IMG}/images/productions/shivom-2.jpg`, cat: "Performances" },
   { src: `${IMG}/images/productions/shivom-3.jpg`, cat: "Performances" },

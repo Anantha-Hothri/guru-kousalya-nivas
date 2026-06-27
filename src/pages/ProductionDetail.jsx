@@ -202,6 +202,13 @@ const ProductionDetail = () => {
                           src={img}
                           alt={`${prod.title} ${(idx % galleryImages.length) + 1}`}
                           className="h-full w-full object-cover"
+                          style={
+                            (img.includes('RamaPriyaTulsidas-1.jpg') || img.includes('RamaPriyaTulsidas-1'))
+                              ? { objectPosition: 'center top' }
+                              : (img.includes('Tiruppavai-1.jpg') || img.includes('Tiruppavai-1'))
+                              ? { objectPosition: 'center 5%' }
+                              : {}
+                          }
                         />
                       </button>
                     );
@@ -326,7 +333,19 @@ const ProductionDetail = () => {
                 className="zoom-parent overflow-hidden rounded-xl transition-transform duration-300 hover:scale-105"
                 style={{ border: "1px solid rgba(182,138,62,0.4)" }}
               >
-                <img src={g} alt={`${prod.title} ${i + 1}`} className="zoom-img h-64 w-full object-cover" loading="lazy" />
+                <img
+                  src={g}
+                  alt={`${prod.title} ${i + 1}`}
+                  className="zoom-img h-64 w-full object-cover"
+                  style={
+                    (g.includes('RamaPriyaTulsidas-1.jpg') || g.includes('RamaPriyaTulsidas-1'))
+                      ? { objectPosition: 'center top' }
+                      : (g.includes('Tiruppavai-1.jpg') || g.includes('Tiruppavai-1'))
+                      ? { objectPosition: 'center 15%' }
+                      : {}
+                  }
+                  loading="lazy"
+                />
               </button>
             ))}
           </div>
