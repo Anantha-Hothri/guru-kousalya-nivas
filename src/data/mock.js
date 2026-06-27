@@ -7,8 +7,19 @@ const IMG = process.env.REACT_APP_USE_LOCAL_IMAGES === 'true' ? '' : 'https://po
 export const SITE = {
   name: "Kousalya Nivas",
   role: "Bharatanatyam Artist, Choreographer & Artistic Director of M.S. Naatyakshetra",
+  // Publicly displayed email (footer, contact info). For form submission destination see src/data/contactConfig.js
   email: "msnatyalaya@gmail.com",
+  phone: ["+91 96636 80808", "+91 96322 33226"],
+  address: {
+    line1: "No.1, A-Block, AECS Layout",
+    line2: "2nd Main, 3rd Cross, Brookfields",
+    city: "Kundalahalli, Bengaluru",
+    state: "Karnataka",
+    pincode: "560037",
+    full: "No.1, A-Block, AECS Layout, 2nd Main, 3rd Cross, Brookfields, Kundalahalli, Bengaluru, Karnataka 560037",
+  },
   location: "Bengaluru, India",
+  copyrightYear: 2026,
   socials: {
     facebook: "https://www.facebook.com/kousalya.nivaas/",
     instagram: "https://www.instagram.com/kousalya.nivas/",
@@ -212,7 +223,7 @@ music:
     ],
     gallery: [
      
-      `${IMG}/images/productions/ha.jpg`,
+      `/images/productions/ha.jpg`,
       `${IMG}/images/productions/Hanumantha_new1.jpeg`,
       `${IMG}/images/productions/Hanumantha_new3.jpeg`,
       `${IMG}/images/productions/Hanumantha_new5.jpeg`,
@@ -542,7 +553,7 @@ export const MEDIA = [
 // Gallery — real production & performance imagery, categorised.
 export const GALLERY = [
   // Hanumantha Production
-  { src: `${IMG}/images/productions/ha.jpg`, cat: "Productions" },
+  { src: `/images/productions/ha.jpg`, cat: "Productions" },
   { src: `${IMG}/images/productions/Hanumantha-2.jpg`, cat: "Productions" },
   { src: `${IMG}/images/productions/Hanumantha-6.jpeg`, cat: "Productions" },
   { src: `${IMG}/images/productions/Hanumantha_new1.jpeg`, cat: "Productions" },
@@ -599,8 +610,6 @@ export const GALLERY = [
   { src: `${IMG}/images/productions/Tiruppavai-5.jpg`, cat: "Portraits" },
 
   // Additional Performance & Portrait Gallery
-  { src: `${IMG}/images/performances/International.JPG`, cat: "Performances" },
-  { src: `${IMG}/images/gallery/MS group.jpeg`, cat: "Group" },
   { src: `${IMG}/images/gallery/kou8.jpeg`, cat: "Portraits" },
   { src: `${IMG}/images/gallery/kou3.jpeg`, cat: "Portraits" },
   { src: `${IMG}/images/gallery/IMG_8177.JPG.jpeg`, cat: "Portraits" },

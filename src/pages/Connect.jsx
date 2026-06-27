@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import emailjs from '@emailjs/browser';
 import { PageHero, LuxeButton } from "../components/Shared";
 import { Mandala, KolamDivider, Lotus, TempleLamp, RangoliBg } from "../components/decorative/Ornaments";
 import { SITE } from "../data/mock";
+import { FORMSUBMIT_URL, EMAIL_SUBJECT_PREFIX, MAPS_EMBED_URL } from "../data/contactConfig";
 import { useReveal } from "../hooks/useAnim";
 import { Mail, MapPin, Phone, Instagram, Facebook, Youtube, CheckCircle2, X } from "lucide-react";
 
@@ -30,47 +30,33 @@ const Connect = () => {
     setError(false);
     setLoading(true);
 
-    // EmailJS configuration
-    const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
-    const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
-    const publicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
-
-    // Validate environment variables
-    if (!serviceId || !templateId || !publicKey) {
-      console.error('EmailJS configuration missing. Please check your .env file.');
-      setError(true);
-      setLoading(false);
-      setTimeout(() => setError(false), 4500);
-      return;
-    }
-
     try {
-      // Send email using EmailJS
-      const result = await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          from_name: form.name,
-          from_email: form.email,
-          phone: form.phone || 'Not provided',
+      const response = await fetch(FORMSUBMIT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone || "Not provided",
           subject: form.subject,
           message: form.message,
-          to_name: 'Guru Kousalya Nivas', // You can customize this
-        },
-        publicKey
-      );
+          _subject: `${EMAIL_SUBJECT_PREFIX} ${form.name} — Kousalya Nivas Website`,
+        }),
+      });
 
-      console.log('Email sent successfully:', result.text);
-      setSent(true);
-      setForm({ name: "", email: "", phone: "", subject: "", message: "" });
-      setLoading(false);
-      setTimeout(() => setSent(false), 4500);
-
+      const data = await response.json();
+      if (data.success === "true" || data.success === true) {
+        setSent(true);
+        setForm({ name: "", email: "", phone: "", subject: "", message: "" });
+        setTimeout(() => setSent(false), 4500);
+      } else {
+        throw new Error("Submission failed");
+      }
     } catch (err) {
-      console.error('Failed to send email:', err);
       setError(true);
-      setLoading(false);
       setTimeout(() => setError(false), 4500);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -136,7 +122,7 @@ const Connect = () => {
             {/* Google Map */}
             <div className="overflow-hidden rounded-xl" style={{ border: "2px solid var(--gold)", boxShadow: "0 10px 30px -10px rgba(110,20,35,0.3)" }}>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.6506876234584!2d77.7092988!3d13.001844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae133386325047%3A0xa8b3b426b70ff9af!2sms%20natyakshetra!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+                src={MAPS_EMBED_URL}
                 width="100%"
                 height="400"
                 style={{ border: 0 }}
