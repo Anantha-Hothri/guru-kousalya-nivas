@@ -66,7 +66,7 @@ const Media = () => {
           {/* Previous Button */}
           <button
             className="absolute left-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full transition-all sm:left-5 sm:h-12 sm:w-12 hover:scale-110 z-10"
-            style={{ border: "2px solid var(--gold)", background: "rgba(40,16,20,0.9)", color: "var(--gold-light)" }}
+            style={{ border: "1px solid var(--gold)", color: "var(--gold-light)" }}
             onClick={(e) => {
               e.stopPropagation();
               goToPrevious();
@@ -79,7 +79,7 @@ const Media = () => {
           {/* Next Button */}
           <button
             className="absolute right-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full transition-all sm:right-5 sm:h-12 sm:w-12 hover:scale-110 z-10"
-            style={{ border: "2px solid var(--gold)", background: "rgba(40,16,20,0.9)", color: "var(--gold-light)" }}
+            style={{ border: "1px solid var(--gold)", color: "var(--gold-light)" }}
             onClick={(e) => {
               e.stopPropagation();
               goToNext();

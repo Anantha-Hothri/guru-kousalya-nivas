@@ -160,15 +160,97 @@ const Awards = () => {
     <div>
       <PageHero title="Awards & Honours" breadcrumb={[{ label: "Home", path: "/" }, { label: "Awards" }]} />
 
-      <section className="py-16" style={{ background: "var(--ivory)" }}>
+      <section className="pt-8 pb-12" style={{ background: "var(--ivory)" }}>
         <p className="mx-auto max-w-2xl px-6 text-center text-base leading-relaxed" style={{ color: "var(--ink-soft)" }}>{AWARDS.intro}</p>
-        <div ref={statRef} className="mx-auto mt-12 grid max-w-3xl gap-5 px-6 sm:grid-cols-3">
+        <div ref={statRef} className="mx-auto mt-8 grid max-w-3xl gap-5 px-6 sm:grid-cols-3">
           {AWARDS.stats.map((s) => <StatBox key={s.label} value={s.value} label={s.label} />)}
         </div>
       </section>
 
+      {/* Cinematic scrolling gallery */}
+      {AWARDS.gallery?.length > 0 && (
+        <section ref={gallerySectionRef} className="py-16 pb-8" style={{ background: "var(--cream)" }}>
+          <SectionTitle eyebrow="Moments of Recognition" title="Award Ceremonies" />
+          <div
+            ref={galleryContainerRef}
+            className="relative mt-8 md:mt-12 h-[280px] md:h-[360px] overflow-hidden"
+            style={{ transformOrigin: "center center" }}
+          >
+            {/* Fading edges - narrower on mobile */}
+            <div
+              className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 md:w-32"
+              style={{ background: "linear-gradient(to right, var(--cream), transparent)" }}
+            />
+            <div
+              className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 md:w-32"
+              style={{ background: "linear-gradient(to left, var(--cream), transparent)" }}
+            />
+
+            {/* Scrolling container */}
+            <div
+              ref={scrollRef}
+              className="flex h-full gap-3 md:gap-5 overflow-x-hidden px-2 md:px-6"
+              style={{ scrollBehavior: 'auto' }}
+            >
+              {/* Duplicate images for infinite scroll effect */}
+              {[...AWARDS.gallery, ...AWARDS.gallery].map((item, idx) => {
+                const actualIndex = idx % AWARDS.gallery.length;
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => openLightbox(actualIndex)}
+                    className="group relative h-full flex-shrink-0 overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105"
+                    style={{
+                      width: window.innerWidth < 768 ? '220px' : '280px',
+                      border: "2px solid var(--gold)",
+                      boxShadow: "0 20px 40px -20px rgba(110,20,35,0.4)"
+                    }}
+                  >
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="h-full w-full object-cover"
+                    loading={idx < 6 ? "eager" : "lazy"}
+                    decoding="async"
+                  />
+                  {/* Gradient overlay - always visible, darkens on hover */}
+                  <div
+                    className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%)" }}
+                  />
+                  {/* Award details - slides up on hover */}
+                  <div
+                    className="absolute inset-x-0 bottom-0 p-5 translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+                  >
+                    <h4
+                      className="font-serif-display text-lg font-semibold leading-tight"
+                      style={{ color: "white", textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}
+                    >
+                      {item.title}
+                    </h4>
+                    <p
+                      className="mt-2 text-sm leading-relaxed"
+                      style={{ color: "rgba(255,255,255,0.9)", textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}
+                    >
+                      {item.org}
+                    </p>
+                    <p
+                      className="mt-2 font-serif-display text-base font-semibold"
+                      style={{ color: "white", textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}
+                    >
+                      {item.year}
+                    </p>
+                  </div>
+                </button>
+              );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Nataraja (left) + Awards list (right) */}
-      <section className="relative overflow-hidden py-16" style={{ background: "var(--ivory)" }}>
+      <section className="relative overflow-hidden pt-8 pb-16" style={{ background: "var(--ivory)" }}>
         <RangoliBg className="absolute -left-32 top-1/4 h-[460px] w-[460px]" opacity={0.12} />
         <SectionTitle eyebrow="A Legacy of Recognition" title="Awards Timeline" />
 
@@ -256,88 +338,6 @@ const Awards = () => {
         </div>
       </section>
 
-      {/* Cinematic scrolling gallery */}
-      {AWARDS.gallery?.length > 0 && (
-        <section ref={gallerySectionRef} className="py-16" style={{ background: "var(--cream)", minHeight: "100vh" }}>
-          <SectionTitle eyebrow="Moments of Recognition" title="Award Ceremonies" />
-          <div
-            ref={galleryContainerRef}
-            className="relative mt-8 md:mt-12 h-[280px] md:h-[360px] overflow-hidden"
-            style={{ transformOrigin: "center center" }}
-          >
-            {/* Fading edges - narrower on mobile */}
-            <div
-              className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 md:w-32"
-              style={{ background: "linear-gradient(to right, var(--cream), transparent)" }}
-            />
-            <div
-              className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 md:w-32"
-              style={{ background: "linear-gradient(to left, var(--cream), transparent)" }}
-            />
-
-            {/* Scrolling container */}
-            <div
-              ref={scrollRef}
-              className="flex h-full gap-3 md:gap-5 overflow-x-hidden px-2 md:px-6"
-              style={{ scrollBehavior: 'auto' }}
-            >
-              {/* Duplicate images for infinite scroll effect */}
-              {[...AWARDS.gallery, ...AWARDS.gallery].map((item, idx) => {
-                const actualIndex = idx % AWARDS.gallery.length;
-                return (
-                  <button
-                    key={idx}
-                    onClick={() => openLightbox(actualIndex)}
-                    className="group relative h-full flex-shrink-0 overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105"
-                    style={{
-                      width: window.innerWidth < 768 ? '220px' : '280px',
-                      border: "2px solid var(--gold)",
-                      boxShadow: "0 20px 40px -20px rgba(110,20,35,0.4)"
-                    }}
-                  >
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="h-full w-full object-cover"
-                    loading={idx < 6 ? "eager" : "lazy"}
-                    decoding="async"
-                  />
-                  {/* Gradient overlay - always visible, darkens on hover */}
-                  <div
-                    className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%)" }}
-                  />
-                  {/* Award details - slides up on hover */}
-                  <div
-                    className="absolute inset-x-0 bottom-0 p-5 translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
-                  >
-                    <h4
-                      className="font-serif-display text-lg font-semibold leading-tight"
-                      style={{ color: "white", textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}
-                    >
-                      {item.title}
-                    </h4>
-                    <p
-                      className="mt-2 text-sm leading-relaxed"
-                      style={{ color: "rgba(255,255,255,0.9)", textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}
-                    >
-                      {item.org}
-                    </p>
-                    <p
-                      className="mt-2 font-serif-display text-base font-semibold"
-                      style={{ color: "white", textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}
-                    >
-                      {item.year}
-                    </p>
-                  </div>
-                </button>
-              );
-              })}
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Image Lightbox */}
       {lightboxData && (
         <div
@@ -358,7 +358,7 @@ const Awards = () => {
           {/* Previous Button */}
           <button
             className="absolute left-4 top-1/2 -translate-y-1/2 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full transition-all duration-300 hover:scale-110"
-            style={{ background: "var(--maroon)", color: "var(--ivory)", boxShadow: "0 4px 16px rgba(110,20,35,0.6)" }}
+            style={{ border: "1px solid var(--gold)", color: "var(--gold-light)" }}
             onClick={(e) => { e.stopPropagation(); navigateLightbox('prev'); }}
             aria-label="Previous image"
           >
@@ -368,7 +368,7 @@ const Awards = () => {
           {/* Next Button */}
           <button
             className="absolute right-4 top-1/2 -translate-y-1/2 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full transition-all duration-300 hover:scale-110"
-            style={{ background: "var(--maroon)", color: "var(--ivory)", boxShadow: "0 4px 16px rgba(110,20,35,0.6)" }}
+            style={{ border: "1px solid var(--gold)", color: "var(--gold-light)" }}
             onClick={(e) => { e.stopPropagation(); navigateLightbox('next'); }}
             aria-label="Next image"
           >

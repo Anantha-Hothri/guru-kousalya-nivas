@@ -31,7 +31,13 @@ const Performances = () => {
           {PERFORMANCES.highlights.map((h) => (
             <div key={h.title} data-reveal className="flex flex-col items-center">
               <ClassicFrame className="w-full max-w-[340px]">
-                <img src={h.image} alt={h.title} className="h-[420px] w-full object-cover" loading="lazy" />
+                <img
+                  src={h.image}
+                  alt={h.title}
+                  className="h-[420px] w-full object-cover"
+                  style={h.title === "Mysore Dasara Festival" ? { objectPosition: "40% center" } : {}}
+                  loading="lazy"
+                />
               </ClassicFrame>
               <h3 className="mt-6 font-serif-display text-2xl font-semibold text-center" style={{ color: "var(--maroon)" }}>{h.title}</h3>
               <ul className="mt-4 space-y-2 w-full">

@@ -25,6 +25,7 @@ const GalleryCard = ({ image, onOpen }) => {
         decoding="async"
         onLoad={() => setLoaded(true)}
         className="w-full h-full object-cover"
+        style={image.src.includes('Dubai_2.jpeg') || image.src.includes('dubai_2.jpeg') ? { objectPosition: '10% center' } : {}}
       />
 
       {/* Hover overlay */}
@@ -69,7 +70,7 @@ const GalleryModal = ({ image, onClose, onPrev, onNext }) => {
 
       <button
         className="absolute left-4 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full transition-all duration-300 hover:scale-110 md:h-14 md:w-14"
-        style={{ background: "var(--maroon)", color: "var(--ivory)", boxShadow: "0 4px 16px rgba(110,20,35,0.6)" }}
+        style={{ border: "1px solid var(--gold)", color: "var(--gold-light)" }}
         onClick={(e) => { e.stopPropagation(); onPrev(); }}
         aria-label="Previous"
       >
@@ -78,7 +79,7 @@ const GalleryModal = ({ image, onClose, onPrev, onNext }) => {
 
       <button
         className="absolute right-4 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full transition-all duration-300 hover:scale-110 md:h-14 md:w-14"
-        style={{ background: "var(--maroon)", color: "var(--ivory)", boxShadow: "0 4px 16px rgba(110,20,35,0.6)" }}
+        style={{ border: "1px solid var(--gold)", color: "var(--gold-light)" }}
         onClick={(e) => { e.stopPropagation(); onNext(); }}
         aria-label="Next"
       >

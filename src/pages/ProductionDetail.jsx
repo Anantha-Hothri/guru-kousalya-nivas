@@ -3,12 +3,14 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Clock, Users, Music, BookOpen, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
 import { PRODUCTIONS } from "../data/mock";
 import { Mandala, KolamDivider, SectionTitle, Lotus, RangoliBg } from "../components/decorative/Ornaments";
-import { YouTubeModal, VideoTile } from "../components/Shared";
+import { VideoTile } from "../components/Shared";
 import { useReveal } from "../hooks/useAnim";
 
 const ProductionDetail = () => {
   const { slug } = useParams();
   const [video, setVideo] = useState(null);
+  const [videoIndex, setVideoIndex] = useState(0);
+  const [videoType, setVideoType] = useState(null); // 'performance' or 'review'
   const [lightboxImage, setLightboxImage] = useState(null);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const prod = PRODUCTIONS.find((p) => p.slug === slug);
@@ -100,12 +102,55 @@ const ProductionDetail = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [lightboxImage, lightboxIndex]);
 
+  // Video navigation functions
+  const openVideo = (videoId, index, type) => {
+    setVideo(videoId);
+    setVideoIndex(index);
+    setVideoType(type);
+  };
+
+  const navigateVideo = (direction) => {
+    const videoList = videoType === 'performance' ? prod.videos : prod.reviews;
+    if (!videoList || videoList.length === 0) return;
+
+    const newIndex = direction === 'next'
+      ? (videoIndex + 1) % videoList.length
+      : (videoIndex - 1 + videoList.length) % videoList.length;
+
+    setVideoIndex(newIndex);
+    setVideo(videoList[newIndex]);
+  };
+
+  const closeVideo = () => {
+    setVideo(null);
+    setVideoIndex(0);
+    setVideoType(null);
+  };
+
+  // Keyboard navigation for video modal
+  useEffect(() => {
+    if (!video) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowLeft') {
+        navigateVideo('prev');
+      } else if (e.key === 'ArrowRight') {
+        navigateVideo('next');
+      } else if (e.key === 'Escape') {
+        closeVideo();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [video, videoIndex, videoType]);
+
   return (
     <div>
       {/* Hero */}
       <section className="relative overflow-hidden pt-32 pb-14" style={{ background: "var(--cream)" }}>
         <RangoliBg className="absolute right-0 top-10 h-[420px] w-[420px]" opacity={0.1} />
-        <div className="relative mx-auto max-w-[1280px] px-6 lg:px-10">
+        <div className="relative mx-auto max-w-[1400px] px-6 lg:px-12">
           <Link to="/productions" className="mb-6 inline-flex items-center gap-2 text-xs tracking-[0.16em] uppercase" style={{ color: "var(--bronze)" }}>
             <ArrowLeft size={15} /> Back to Productions
           </Link>
@@ -170,7 +215,7 @@ const ProductionDetail = () => {
 
       {/* Credits */}
       <section className="py-16" style={{ background: "var(--ivory)" }}>
-        <div className="mx-auto grid max-w-[1100px] gap-5 px-6 sm:grid-cols-2 lg:grid-cols-4 lg:px-10">
+        <div className="mx-auto grid max-w-[1400px] gap-5 px-6 sm:grid-cols-2 lg:grid-cols-4 lg:px-12">
           {credits.map((c) => (
             <div key={c.label} className="luxe-card rounded-xl p-6 text-center">
               <span className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full" style={{ background: "var(--cream)", border: "1px solid var(--gold)" }}>
@@ -185,7 +230,7 @@ const ProductionDetail = () => {
 
       {/* Storyline + Music */}
       <section className="py-12" style={{ background: "var(--ivory)" }}>
-        <div className="mx-auto grid max-w-[1100px] gap-12 px-6 lg:grid-cols-2 lg:px-10">
+        <div className="mx-auto grid max-w-[1400px] gap-12 px-6 lg:grid-cols-2 lg:px-12">
           <div>
             <h2 className="font-serif-display text-3xl font-semibold" style={{ color: "var(--maroon)" }}>Storyline</h2>
             <Lotus className="my-4 h-5 w-10" color="var(--gold)" />
@@ -206,11 +251,57 @@ const ProductionDetail = () => {
         </div>
       </section>
 
+      {/* Videos - Performance Highlights */}
+      {prod.videos?.length > 0 && (
+        <section className="py-16" style={{ background: "var(--ivory)" }}>
+          <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+            <div className="mb-10 text-center">
+              <h2 className="font-serif-display text-3xl font-semibold" style={{ color: "var(--maroon)" }}>Performance Highlights</h2>
+              <Lotus className="mx-auto mt-4 h-5 w-10" color="var(--gold)" />
+            </div>
+            <div className={`mx-auto grid gap-5 ${
+              prod.videos.length === 1
+                ? 'max-w-[600px]'
+                : prod.videos.length === 2
+                  ? 'max-w-[900px] sm:grid-cols-2'
+                  : 'sm:grid-cols-2 lg:grid-cols-3'
+            }`}>
+              {prod.videos.map((v, idx) => (
+                <VideoTile key={v} videoId={v} onPlay={() => openVideo(v, idx, 'performance')} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Videos - Audience Reviews */}
+      {prod.reviews?.length > 0 && (
+        <section className="py-16" style={{ background: "var(--cream)" }}>
+          <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+            <div className="mb-10 text-center">
+              <h2 className="font-serif-display text-3xl font-semibold" style={{ color: "var(--maroon)" }}>Audience Reviews</h2>
+              <Lotus className="mx-auto mt-4 h-5 w-10" color="var(--gold)" />
+            </div>
+            <div className={`mx-auto grid gap-5 ${
+              prod.reviews.length === 1
+                ? 'max-w-[600px]'
+                : prod.reviews.length === 2
+                  ? 'max-w-[900px] sm:grid-cols-2'
+                  : 'sm:grid-cols-2 lg:grid-cols-3'
+            }`}>
+              {prod.reviews.map((v, idx) => (
+                <VideoTile key={v} videoId={v} onPlay={() => openVideo(v, idx, 'review')} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Stages */}
-      <section className="py-12" style={{ background: "var(--ivory)" }}>
-        <div className="mx-auto max-w-[1100px] px-6 lg:px-10">
-          <h2 className="font-serif-display text-3xl font-semibold" style={{ color: "var(--maroon)" }}>Stages Performed</h2>
-          <KolamDivider className="my-5" center={false} />
+      <section className="py-12" style={{ background: "var(--cream)" }}>
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+          <h2 className="font-serif-display text-3xl font-semibold text-center" style={{ color: "var(--maroon)" }}>Stages Performed</h2>
+          <KolamDivider className="my-5" center={true} />
           <div className="grid gap-3 sm:grid-cols-2">
             {prod.stages.map((s) => (
               <div key={s} className="flex items-start gap-3 rounded-lg p-4 luxe-card">
@@ -224,9 +315,9 @@ const ProductionDetail = () => {
 
       {/* Gallery */}
       {prod.gallery?.length > 1 && (
-        <section className="py-16" style={{ background: "var(--cream)" }}>
+        <section className="py-16" style={{ background: "var(--ivory)" }}>
           <SectionTitle eyebrow="Glimpses" title="Production Gallery" />
-          <div ref={galRef} className="mx-auto mt-12 grid max-w-[1280px] grid-cols-2 gap-4 px-6 md:grid-cols-3 lg:px-10">
+          <div ref={galRef} className="mx-auto mt-12 grid max-w-[1400px] grid-cols-2 gap-4 px-6 md:grid-cols-3 lg:grid-cols-4 lg:px-12">
             {prod.gallery.map((g, i) => (
               <button
                 key={i}
@@ -242,31 +333,65 @@ const ProductionDetail = () => {
         </section>
       )}
 
-      {/* Videos */}
-      {prod.videos?.length > 0 && (
-        <section className="py-16" style={{ background: "var(--ivory)" }}>
-          <SectionTitle eyebrow="Watch" title="Video Highlights" />
-          <div className="mx-auto mt-12 grid max-w-[1100px] gap-5 px-6 sm:grid-cols-2 lg:grid-cols-3 lg:px-10">
-            {prod.videos.map((v) => (
-              <VideoTile key={v} videoId={v} onPlay={setVideo} />
-            ))}
-          </div>
-        </section>
-      )}
+      {/* YouTube Modal with Navigation */}
+      {video && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          style={{ background: "rgba(40,16,20,0.88)" }}
+          onClick={closeVideo}
+        >
+          {/* Close Button */}
+          <button
+            className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full z-10"
+            style={{ border: "1px solid var(--gold)", color: "var(--gold-light)" }}
+            onClick={closeVideo}
+            aria-label="Close"
+          >
+            <span className="text-2xl">×</span>
+          </button>
 
-      {/* Review Videos */}
-      {prod.reviews?.length > 0 && (
-        <section className="py-16" style={{ background: "var(--cream)" }}>
-          <SectionTitle eyebrow="Feedback" title="Audience Reviews" />
-          <div className="mx-auto mt-12 grid max-w-[1100px] gap-5 px-6 sm:grid-cols-2 lg:grid-cols-3 lg:px-10">
-            {prod.reviews.map((v) => (
-              <VideoTile key={v} videoId={v} onPlay={setVideo} />
-            ))}
-          </div>
-        </section>
-      )}
+          {/* Previous Button */}
+          {((videoType === 'performance' && prod.videos?.length > 1) ||
+            (videoType === 'review' && prod.reviews?.length > 1)) && (
+            <button
+              className="absolute left-4 top-1/2 -translate-y-1/2 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full transition-all duration-300 hover:scale-110 z-10"
+              style={{ border: "1px solid var(--gold)", color: "var(--gold-light)" }}
+              onClick={(e) => { e.stopPropagation(); navigateVideo('prev'); }}
+              aria-label="Previous video"
+            >
+              <ChevronLeft size={28} />
+            </button>
+          )}
 
-      <YouTubeModal videoId={video} onClose={() => setVideo(null)} />
+          {/* Next Button */}
+          {((videoType === 'performance' && prod.videos?.length > 1) ||
+            (videoType === 'review' && prod.reviews?.length > 1)) && (
+            <button
+              className="absolute right-4 top-1/2 -translate-y-1/2 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full transition-all duration-300 hover:scale-110 z-10"
+              style={{ border: "1px solid var(--gold)", color: "var(--gold-light)" }}
+              onClick={(e) => { e.stopPropagation(); navigateVideo('next'); }}
+              aria-label="Next video"
+            >
+              <ChevronRight size={28} />
+            </button>
+          )}
+
+          {/* Video Player */}
+          <div
+            className="aspect-video w-full max-w-4xl overflow-hidden rounded-lg"
+            style={{ border: "2px solid var(--gold)" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <iframe
+              className="h-full w-full"
+              src={`https://www.youtube.com/embed/${video}?autoplay=1`}
+              title="Video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      )}
 
       {/* Image Lightbox */}
       {lightboxImage && (
@@ -288,7 +413,7 @@ const ProductionDetail = () => {
           {/* Previous Button */}
           <button
             className="absolute left-4 top-1/2 -translate-y-1/2 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full transition-all duration-300 hover:scale-110"
-            style={{ background: "var(--maroon)", color: "var(--ivory)", boxShadow: "0 4px 16px rgba(110,20,35,0.6)" }}
+            style={{ border: "1px solid var(--gold)", color: "var(--gold-light)" }}
             onClick={(e) => { e.stopPropagation(); navigateLightbox('prev'); }}
             aria-label="Previous image"
           >
@@ -298,7 +423,7 @@ const ProductionDetail = () => {
           {/* Next Button */}
           <button
             className="absolute right-4 top-1/2 -translate-y-1/2 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full transition-all duration-300 hover:scale-110"
-            style={{ background: "var(--maroon)", color: "var(--ivory)", boxShadow: "0 4px 16px rgba(110,20,35,0.6)" }}
+            style={{ border: "1px solid var(--gold)", color: "var(--gold-light)" }}
             onClick={(e) => { e.stopPropagation(); navigateLightbox('next'); }}
             aria-label="Next image"
           >

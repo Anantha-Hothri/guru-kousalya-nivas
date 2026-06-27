@@ -377,7 +377,7 @@ const Home = () => {
           {/* Previous Button */}
           <button
             className="absolute left-4 top-1/2 -translate-y-1/2 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full transition-all duration-300 hover:scale-110"
-            style={{ background: "var(--maroon)", color: "var(--ivory)", boxShadow: "0 4px 16px rgba(110,20,35,0.6)" }}
+            style={{ border: "1px solid var(--gold)", color: "var(--gold-light)" }}
             onClick={(e) => { e.stopPropagation(); navigateLightbox('prev'); }}
             aria-label="Previous image"
           >
@@ -387,7 +387,7 @@ const Home = () => {
           {/* Next Button */}
           <button
             className="absolute right-4 top-1/2 -translate-y-1/2 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full transition-all duration-300 hover:scale-110"
-            style={{ background: "var(--maroon)", color: "var(--ivory)", boxShadow: "0 4px 16px rgba(110,20,35,0.6)" }}
+            style={{ border: "1px solid var(--gold)", color: "var(--gold-light)" }}
             onClick={(e) => { e.stopPropagation(); navigateLightbox('next'); }}
             aria-label="Next image"
           >

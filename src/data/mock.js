@@ -111,7 +111,10 @@ export const PRODUCTIONS = [
     music:
 "Andal Thiruppavai is a live concert that combines intricate footwork, expressive gestures, and emotive storytelling of 13 out of 30 Tamil devotional hymns composed by Andal, the only female Alvar saint of the Vaishnavite tradition. These hymns are part of the Divya Prabandham and are recited during the Margazhi month (December-January) as a form of devotion to Lord Vishnu. These pasurams are beautifully choreographed to provide a harmonious blend of rhythm, melody, and artistry, offering audiences an immersive experience of Andal's devotion and love towards Krishna.",
     reference: "Andal's Thiruppavai - Divya Prabandham",
-    stages: ["Seva Sadan, Malleshwaram, Bengaluru"],
+    stages: [
+      "Parvata Vedike, Whitefield, Bengaluru",
+      "Seva Sadan, Malleshwaram, Bengaluru",
+    ],
     gallery: [
       `${IMG}/images/productions/Tiruppavai-1.jpg`,
       `${IMG}/images/productions/Tiruppavai-2.jpg`,
@@ -305,7 +308,7 @@ export const PERFORMANCES = {
       title: "International Recognition & Professional Mastery",
       points: [
         "Dubai International Art Festival",
-        "Seva Sadan International Festival",
+        "Securonix Corporate CEO Connect ",
         "ITC Hotel International Conference (2017)",
         "Top CEO Meet at Shangri-La Hotel"
       ],
@@ -318,7 +321,7 @@ export const PERFORMANCES = {
         "Kalamandira (2022)",
         "Jaganmohan Palace (2018)"
       ],
-      image: `${IMG}/images/performances/Mysore Dance festival.png`
+      image: `${IMG}/images/performances/mysore_dasara_festival.jpeg`
     },
     {
       title: "All-India Competition",
@@ -409,7 +412,7 @@ export const PERFORMANCES = {
 };
 
 export const AWARDS = {
-  intro: "Grateful for the recognition and encouragement that inspires me to continue this artistic journey.",
+  // intro: "Grateful for the recognition and encouragement that inspires me to continue this artistic journey.",
   nataraja: "/nat.png",
   stats: [
     { value: "6", label: "National & International" },
@@ -618,6 +621,8 @@ export const GALLERY = [
   { src: `${IMG}/images/gallery/kou6.jpeg`, cat: "Portraits" },
   { src: `${IMG}/images/gallery/IMG_2247.JPG.jpeg`, cat: "Portraits" },
   { src: `${IMG}/images/gallery/IMG_2255.JPG.jpeg`, cat: "Portraits" },
+  { src: `${IMG}/images/gallery/new.jpeg`, cat: "Portraits" },
+  { src: `${IMG}/images/gallery/new2.jpeg`, cat: "Portraits" },
   { src: `${IMG}/images/gallery/kou7.jpeg`, cat: "Performances" },
   { src: `${IMG}/images/gallery/kou9.jpeg`, cat: "Performances" },
   { src: `${IMG}/images/gallery/kou10.jpeg`, cat: "Performances" },
@@ -626,6 +631,10 @@ export const GALLERY = [
   { src: `${IMG}/images/gallery/IMG_2257.JPG.jpeg`, cat: "Group" },
   { src: `${IMG}/images/gallery/IMG_2258.JPG.jpeg`, cat: "Group" },
   { src: `${IMG}/images/gallery/IMG_8207.JPG.jpeg`, cat: "Portraits" },
+
+  // Dubai Performance Images
+  { src: `${IMG}/images/performances/dubai_1.jpeg`, cat: "Performances" },
+  { src: `${IMG}/images/performances/dubai_2.jpeg`, cat: "Performances" },
 ];
 
 export const GALLERY_FILTERS = ["All", "Performances", "Productions", "Group", "Portraits"];
