@@ -152,15 +152,21 @@ html { scroll-behavior: smooth; }
 /* rangoli rotates slowly, drawn over ivory via multiply blend */
 .rangoli-bg { mix-blend-mode: multiply; }
 
+/* Image loading shimmer animation */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
 /* Hero section responsive background position */
 .hero-bg-mobile {
-  
+
   background-position:  100% 30% !important;
 }
 
 @media (min-width: 1024px) {
   .hero-bg-desktop {
-   
+
     background-position: 100% 45% !important;
   }
 }

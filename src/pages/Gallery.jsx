@@ -12,20 +12,37 @@ const GalleryCard = ({ image, onOpen }) => {
       onClick={onOpen}
       className="relative group overflow-hidden rounded-xl focus:outline-none w-full aspect-[3/4]"
       style={{
-        opacity: loaded ? 1 : 0,
-        transition: "opacity 0.45s ease",
         border: "1px solid rgba(182,138,62,0.35)",
         cursor: "pointer",
       }}
     >
+      {/* Shimmer placeholder - shown while loading */}
+      {!loaded && (
+        <div
+          className="absolute inset-0 animate-pulse"
+          style={{ background: "linear-gradient(90deg, var(--cream) 0%, var(--ivory) 50%, var(--cream) 100%)" }}
+        >
+          <div
+            className="absolute inset-0"
+            style={{
+              background: "linear-gradient(90deg, transparent 0%, rgba(182,138,62,0.1) 50%, transparent 100%)",
+              animation: "shimmer 2s infinite"
+            }}
+          />
+        </div>
+      )}
+
       <img
         src={image.src}
         alt={image.cat}
         loading="lazy"
         decoding="async"
         onLoad={() => setLoaded(true)}
-        className="w-full h-full object-cover"
-        style={image.src.includes('Dubai_2.jpeg') || image.src.includes('dubai_2.jpeg') ? { objectPosition: '10% center' } : {}}
+        className="w-full h-full object-cover transition-opacity duration-500"
+        style={{
+          opacity: loaded ? 1 : 0,
+          ...(image.src.includes('Dubai_2.jpeg') || image.src.includes('dubai_2.jpeg') ? { objectPosition: '10% center' } : {})
+        }}
       />
 
       {/* Hover overlay */}
