@@ -1,0 +1,40 @@
+# Dependencies
+node_modules
+
+# Testing
+coverage
+
+# Production build (will be regenerated)
+build
+
+# Environment variables (use Vercel dashboard instead)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Documentation (optional - remove lines below if you want docs deployed)
+README.md
+EMAILJS_SETUP.md
+CONTACT_FORM_IMPLEMENTATION.md
+VERCEL_DEPLOYMENT.md
