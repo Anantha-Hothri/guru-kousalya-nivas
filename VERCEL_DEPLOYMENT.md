@@ -27,19 +27,15 @@ Vercel will auto-detect Create React App, but verify these settings:
 - **Install Command:** `yarn install` (or `npm install`)
 - **Root Directory:** `./` (leave as default)
 
-### Step 3: Add Environment Variables
+### Step 3: Add Environment Variables (Optional)
 Click **"Environment Variables"** and add:
 
 ```
-REACT_APP_EMAILJS_PUBLIC_KEY=your_emailjs_public_key
-REACT_APP_EMAILJS_SERVICE_ID=your_emailjs_service_id
-REACT_APP_EMAILJS_TEMPLATE_ID=your_emailjs_template_id
 REACT_APP_USE_LOCAL_IMAGES=false
 ```
 
-**Important:** Get these values from:
-- EmailJS dashboard: https://dashboard.emailjs.com/
-- See `EMAILJS_SETUP.md` for detailed setup instructions
+**Note:** The contact form uses FormSubmit.co (no API keys required).
+Email destination is configured in `src/data/contactConfig.js`.
 
 ### Step 4: Deploy
 1. Click **"Deploy"**
@@ -70,11 +66,8 @@ vercel
 # - In which directory is your code located? ./
 ```
 
-### Add Environment Variables via CLI
+### Add Environment Variables via CLI (Optional)
 ```bash
-vercel env add REACT_APP_EMAILJS_PUBLIC_KEY
-vercel env add REACT_APP_EMAILJS_SERVICE_ID
-vercel env add REACT_APP_EMAILJS_TEMPLATE_ID
 vercel env add REACT_APP_USE_LOCAL_IMAGES
 ```
 
@@ -92,15 +85,15 @@ vercel --prod
 - `package.json` - Build scripts and dependencies
 - `.gitignore` - Excludes `.env` and build files
 
-### 📝 Environment Variables Required
+### 📝 Environment Variables (Optional)
 Create these in Vercel dashboard under **Settings → Environment Variables**:
 
 | Variable | Description | Example |
 |----------|-------------|---------|
-| `REACT_APP_EMAILJS_PUBLIC_KEY` | EmailJS public key | `xxxxx_xxxxxxxxxxxx` |
-| `REACT_APP_EMAILJS_SERVICE_ID` | EmailJS service ID | `service_xyz1234` |
-| `REACT_APP_EMAILJS_TEMPLATE_ID` | EmailJS template ID | `template_abc5678` |
 | `REACT_APP_USE_LOCAL_IMAGES` | Use local images (false for Vercel) | `false` |
+
+**Contact Form:** Uses FormSubmit.co - no environment variables needed.
+Configure email destination in `src/data/contactConfig.js`.
 
 ---
 
@@ -150,9 +143,11 @@ git push origin main
 - Test build locally: `yarn build`
 
 ### Contact Form Not Working
-- Verify EmailJS environment variables are set
-- Check EmailJS dashboard for API limits (200 emails/month free)
-- Test with browser console open for error messages
+- **First submission:** FormSubmit sends verification email to configured address
+- Check spam folder for verification email from FormSubmit.co
+- Click "Activate Form" link in the verification email
+- After activation, all submissions will be delivered
+- Check browser console for error messages
 
 ### Images Not Loading
 - Set `REACT_APP_USE_LOCAL_IMAGES=false` in Vercel
@@ -168,11 +163,10 @@ git push origin main
 ## Support & Resources
 
 - **Vercel Docs:** https://vercel.com/docs
-- **EmailJS Docs:** https://www.emailjs.com/docs
+- **FormSubmit Docs:** https://formsubmit.co/
 - **This Project's Docs:**
   - `README.md` - Project overview
-  - `EMAILJS_SETUP.md` - Email configuration
-  - `CONTACT_FORM_IMPLEMENTATION.md` - Form details
+  - `src/data/contactConfig.js` - Contact form configuration
 
 ---
 

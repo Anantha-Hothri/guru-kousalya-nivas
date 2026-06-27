@@ -2,17 +2,23 @@
 
 A beautiful React-based website showcasing the work and achievements of Guru Kousalya Nivas.
 
-## 📧 Contact Form Setup
+## 📧 Contact Form
 
-This project uses **EmailJS** for the contact form - no backend required!
+This project uses **FormSubmit.co** for the contact form - completely free, no signup or API keys required!
 
-**👉 [Complete EmailJS Setup Guide](./EMAILJS_SETUP.md)**
+**Configuration:** Edit the email destination in `src/data/contactConfig.js`
 
-Quick setup:
-1. Create account at [emailjs.com](https://www.emailjs.com)
-2. Configure email service and template
-3. Copy credentials to `.env` file
-4. Test the contact form
+**First-time setup:**
+1. Submit the contact form once
+2. FormSubmit sends a verification email to your configured address
+3. Click "Activate Form" in the email
+4. All future submissions will be delivered to your email
+
+---
+
+## 🚀 Deployment
+
+Ready to deploy on Vercel! See **[VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md)** for complete deployment guide.
 
 ---
 
